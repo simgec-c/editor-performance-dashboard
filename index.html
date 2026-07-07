@@ -1082,7 +1082,7 @@ const EPD_STORE_KEY='epd_dashboard_data_v1';
 let EPD_PASS=null;
 const _ENC=new TextEncoder(), _DEC=new TextDecoder();
 const _b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-const _b64e=u=>btoa(String.fromCharCode.apply(null,new Uint8Array(u)));
+const _b64e=u=>{const a=new Uint8Array(u);let s='';for(let i=0;i<a.length;i+=0x8000)s+=String.fromCharCode.apply(null,a.subarray(i,i+0x8000));return btoa(s);};
 async function _deriveKey(pass,salt,iter){
   const bk=await crypto.subtle.importKey('raw',_ENC.encode(pass),'PBKDF2',false,['deriveKey']);
   return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:iter,hash:'SHA-256'},bk,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
@@ -1092,11 +1092,12 @@ async function epdDecrypt(env,pass){
   const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:_b64d(env.iv)},key,_b64d(env.ct));
   return JSON.parse(_DEC.decode(pt));
 }
+const EPD_ITER=600000; /* eski kayıtlar kendi iter değeriyle çözülür (env.iter) */
 async function epdEncrypt(obj,pass){
   const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
-  const key=await _deriveKey(pass,salt,200000);
+  const key=await _deriveKey(pass,salt,EPD_ITER);
   const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,_ENC.encode(JSON.stringify(obj)));
-  return {v:1,kdf:'PBKDF2',iter:200000,hash:'SHA-256',salt:_b64e(salt),iv:_b64e(iv),ct:_b64e(ct)};
+  return {v:1,kdf:'PBKDF2',iter:EPD_ITER,hash:'SHA-256',salt:_b64e(salt),iv:_b64e(iv),ct:_b64e(ct)};
 }
 function _skeleton(){return {editors:[],site:[],meta:{brands:{},months:[],generated:'',savedAt:''}};}
 function _encEnvelope(){try{const el=document.getElementById('encpayload');if(el){const t=el.textContent.trim();if(t&&t.indexOf('__ENC')<0)return JSON.parse(t);}}catch(e){}return null;}
@@ -1114,8 +1115,8 @@ function saveData(){
   if(!EPD_PASS)return;
   try{
     const snap={editors:DATA.editors,site:DATA.site,meta:{brands:DATA.meta.brands,months:MONTHS.slice(),generated:new Date().toISOString().slice(0,10),savedAt:new Date().toISOString()}};
-    epdEncrypt(snap,EPD_PASS).then(env=>{try{localStorage.setItem(EPD_STORE_KEY,JSON.stringify(env));}catch(e){console.warn('Taslak kaydedilemedi',e);}}).catch(e=>console.warn('Taslak sifrelenemedi',e));
-  }catch(e){console.warn('Taslak kaydedilemedi',e);}
+    epdEncrypt(snap,EPD_PASS).then(env=>{try{localStorage.setItem(EPD_STORE_KEY,JSON.stringify(env));}catch(e){console.warn('Taslak kaydedilemedi',e);toast('Taslak kaydedilemedi — tarayıcı deposu dolu olabilir','bad');}}).catch(e=>{console.warn('Taslak sifrelenemedi',e);toast('Taslak kaydedilemedi (şifreleme hatası) — veri tarayıcıya yazılamadı','bad');});
+  }catch(e){console.warn('Taslak kaydedilemedi',e);toast('Taslak kaydedilemedi','bad');}
 }
 function resetData(){try{localStorage.removeItem(EPD_STORE_KEY);}catch(e){}location.reload();}
 window.resetDashboardData=resetData;
@@ -1582,7 +1583,7 @@ function bootDashboard(){
 
 /* ================= DATA ENTRY MODULE ================= */
 // Brand detection from Excel header suffix
-const BRAND_TAGS={'(tg)':'TG','(tgrt)':'TGRT','(turkiyetoday)':'TT','(turkiye today)':'TT','(tt)':'TT'};
+const BRAND_TAGS={'(tg)':'TG','(tgrt)':'TGRT','(turkiyetoday)':'TT','(turkiye today)':'TT','(türkiyetoday)':'TT','(türkiye today)':'TT','(tt)':'TT'};
 const MONTH_NAMES={ocak:'2026-01',subat:'2026-02','şubat':'2026-02',mart:'2026-03',nisan:'2026-04','nisAN':'2026-04',mayis:'2026-05','mayıs':'2026-05',haziran:'2026-06',temmuz:'2026-07','ağustos':'2026-08',agustos:'2026-08',eylul:'2026-09','eylül':'2026-09',ekim:'2026-10',kasim:'2026-11','kasım':'2026-11',aralik:'2026-12','aralık':'2026-12'};
 let stage=[]; // pending items
 
@@ -1604,12 +1605,19 @@ function toast(msg,kind){const t=document.createElement('div');t.className='toas
   document.body.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
   setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),350);},2600);}
 
+/* Dışarıdan gelen metinlerden (Excel/PDF/dosya adı) HTML karakterlerini ayıkla —
+   bu metinler innerHTML'e yazılıyor, enjeksiyon olmasın */
+function sane(s){return String(s==null?'':s).replace(/[<>]/g,'');}
+
 function guessMonthFromName(fn){fn=fn.toLowerCase();
-  for(const k in MONTH_NAMES){if(fn.indexOf(k.toLowerCase())>=0)return MONTH_NAMES[k];}return '';}
+  /* dosya adında yıl varsa onu kullan; yoksa içinde bulunulan yıl (2027'de
+     "Haziran" dosyası 2026'nın üzerine yazmasın) */
+  const ym=fn.match(/20\d{2}/);const yr=ym?ym[0]:String(new Date().getFullYear());
+  for(const k in MONTH_NAMES){if(fn.indexOf(k.toLowerCase())>=0)return yr+'-'+MONTH_NAMES[k].split('-')[1];}return '';}
 function guessBrandFromName(fn){fn=fn.toLowerCase();
   if(fn.indexOf('tgrt')>=0)return 'TGRT';
-  if(fn.indexOf('tt-')>=0||fn.indexOf('today')>=0)return 'TT';
-  if(fn.indexOf('tg-')>=0||fn.indexOf('gazete')>=0)return 'TG';return '';}
+  if(/\btt\b/.test(fn)||fn.indexOf('today')>=0||fn.indexOf('türkiye today')>=0||fn.indexOf('turkiye today')>=0)return 'TT';
+  if(/\btg\b/.test(fn)||fn.indexOf('gazete')>=0)return 'TG';return '';}
 
 // ---------- EXCEL ----------
 async function handleExcel(file){
@@ -1627,16 +1635,21 @@ async function handleExcel(file){
   const editors=[];
   for(let i=1;i<rows.length;i++){
     const r=rows[i];if(!r||r[0]==null)continue;
-    const name=String(r[0]).trim();
+    const name=sane(String(r[0]).trim());
     if(!name||['toplam','total','genel toplam'].indexOf(name.toLowerCase())>=0)continue;
-    const num=v=>{if(v==null||v==='')return 0;const n=Number(String(v).replace(/\./g,'').replace(',','.'));return isNaN(n)?Number(v)||0:(String(v).indexOf(',')>=0?n:Number(v)||0);};
+    /* metin biçimli hücreleri de çöz: "1.234.567"/"45.000" (binlik), "12,5" (ondalık) */
+    const num=v=>{if(v==null||v==='')return 0;if(typeof v==='number')return v;
+      const s=String(v).trim();
+      if(/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)||s.indexOf(',')>=0)
+        return Number(s.replace(/\./g,'').replace(',','.'))||0;
+      return Number(s)||0;};
     editors.push({editor:name,
-      posts:Math.round(Number(r[1])||0),views:Math.round(Number(r[2])||0),
-      users:Math.round(Number(r[3])||0),sessions:Math.round(Number(r[4])||0),
-      avgSession:Math.round((Number(r[5])||0)*100)/100,avgEngage:Math.round((Number(r[6])||0)*100)/100});
+      posts:Math.round(num(r[1])),views:Math.round(num(r[2])),
+      users:Math.round(num(r[3])),sessions:Math.round(num(r[4])),
+      avgSession:Math.round(num(r[5])*100)/100,avgEngage:Math.round(num(r[6])*100)/100});
   }
   if(!editors.length)return stageError(file.name,'excel','Geçerli editör satırı bulunamadı.');
-  stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:'excel',file:file.name,
+  stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:'excel',file:sane(file.name),
     brand:brand,month:guessMonthFromName(file.name),editors:editors});
   renderStage();
 }
@@ -1655,7 +1668,7 @@ async function handlePdf(file){
     text=Object.keys(lines).sort((a,b)=>b-a).map(y=>lines[y].sort((a,b)=>a.x-b.x).map(i=>i.s).join(' ')).join('\n');
   }catch(e){
     // fall back to empty manual entry
-    stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:'pdf',file:file.name,
+    stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:'pdf',file:sane(file.name),
       brand:guessBrandFromName(file.name),month:guessMonthFromName(file.name),
       site:{totalUsers:0,newUsers:0,returningUsers:0,avgEngageTime:0,engagedSessionsPerUser:0,eventCount:0},channels:[],manual:true});
     renderStage();toast('PDF otomatik okunamadı — değerleri elle girin','bad');return;
@@ -1669,14 +1682,14 @@ async function handlePdf(file){
   // channels
   const channels=[];
   text.split('\n').forEach(l=>{const cm=l.match(/^\s*\d+\s+([A-Za-z][A-Za-z \/]+?)\s+([\d,]+)\s+\(([\d.<%]+)\)/);
-    if(cm)channels.push({channel:cm[1].trim(),users:num(cm[2]),pct:cm[3]});});
-  stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:'pdf',file:file.name,
+    if(cm)channels.push({channel:sane(cm[1].trim()),users:num(cm[2]),pct:sane(cm[3])});});
+  stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:'pdf',file:sane(file.name),
     brand:guessBrandFromName(file.name),month:guessMonthFromName(file.name),site:site,channels:channels,manual:!tm});
   renderStage();
 }
 
 function stageError(fname,type,msg){
-  stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:type,file:fname,error:msg});
+  stage.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),type:type,file:sane(fname),error:msg});
   renderStage();
 }
 
@@ -1691,7 +1704,7 @@ function renderStage(){
   if(!stage.length){wrap.style.display='none';return;}
   wrap.style.display='block';
   document.getElementById('stageCount').textContent=stage.length+' dosya hazır';
-  const _TRM={'01':'Ocak','02':'Şubat','03':'Mart','04':'Nisan','05':'Mayıs','06':'Haziran','07':'Temmuz','08':'Ağustos','09':'Eylül','10':'Ekim','11':'Kasım','12':'Aralık'};const _yrs=[...new Set(MONTHS.map(m=>m.key.slice(0,4)).concat('2026'))].sort();const monthOpts=_yrs.flatMap(y=>Object.keys(_TRM).map(mm=>`<option value="${y}-${mm}">${_TRM[mm]}${y!=='2026'?' '+y:''}</option>`)).join('');
+  const _TRM={'01':'Ocak','02':'Şubat','03':'Mart','04':'Nisan','05':'Mayıs','06':'Haziran','07':'Temmuz','08':'Ağustos','09':'Eylül','10':'Ekim','11':'Kasım','12':'Aralık'};const _yrs=[...new Set(MONTHS.map(m=>m.key.slice(0,4)).concat('2026',stage.filter(x=>x.month).map(x=>x.month.slice(0,4))))].sort();const monthOpts=_yrs.flatMap(y=>Object.keys(_TRM).map(mm=>`<option value="${y}-${mm}">${_TRM[mm]}${y!=='2026'?' '+y:''}</option>`)).join('');
   const brandOpts=['TG','TGRT','TT'].map(b=>`<option value="${b}">${BRANDS[b].full}</option>`).join('');
   document.getElementById('stageList').innerHTML=stage.map(it=>{
     if(it.error){return `<div class="stage-card err"><div class="sc-top">
@@ -2328,6 +2341,8 @@ async function tryLogin(u,p){
 
 function initLogin(){
   document.body.classList.add('locked');
+  const _gate=document.getElementById('loginGate');
+  if(_gate)_gate.classList.remove('hidden'); /* dışa aktarılan kopyada kapı gizli kalmasın */
   const scope=document.getElementById('loginScope');
   if(scope)scope.innerHTML=AUTH.scopeLabel;
   const form=document.getElementById('loginForm'),err=document.getElementById('loginErr');
