@@ -1062,9 +1062,10 @@ body.locked{overflow:hidden}
     <div class="section-head"><h2 style="font-size:16px">Mevcut Veri Kümesi</h2><span class="rule"></span></div>
     <div class="tbl-wrap"><table id="datasetTbl"></table></div>
     <div class="stage-actions">
-      <button class="btn-primary" id="exportBtn">⤓ Güncel panoyu indir (.html)</button>
+      <button class="btn-primary" id="publishBtn">☁️ Kalıcı Kaydet (Yayınla)</button>
+      <button class="btn-ghost" id="exportBtn">⤓ Güncel panoyu indir (.html)</button>
       <button class="btn-ghost" id="exportJsonBtn">Veriyi JSON olarak indir</button>
-      <span class="export-note" id="exportNote">Eklediğiniz veriler bu oturumda canlıdır. Kalıcı olması için güncel panoyu indirin.</span>
+      <span class="export-note" id="exportNote">Eklediğiniz veriler tarayıcınıza otomatik kaydedilir; herkes için kalıcı olması için ☁️ Yayınla'ya basın.</span>
     </div>
   </section>
 </main>
@@ -1101,6 +1102,61 @@ async function epdEncrypt(obj,pass){
 }
 function _skeleton(){return {editors:[],site:[],meta:{brands:{},months:[],generated:'',savedAt:''}};}
 function _encEnvelope(){try{const el=document.getElementById('encpayload');if(el){const t=el.textContent.trim();if(t&&t.indexOf('__ENC')<0)return JSON.parse(t);}}catch(e){}return null;}
+/* ===== Yayınlanmış veri: repo'daki data.json (şifreli zarf). Sayfa gömülü
+   veriden önce bunu dener; ulaşılamazsa gömülüye düşer. ===== */
+const EPD_REPO='simgec-c/editor-performance-dashboard';
+const EPD_DATA_FILE='data.json';
+let REMOTE_ENV_PROMISE=(async()=>{try{
+  const r=await fetch(EPD_DATA_FILE+'?v='+Date.now(),{cache:'no-store'});
+  if(!r.ok)return null;
+  const j=await r.json();
+  return (j&&j.ct&&j.salt&&j.iv)?j:null;
+}catch(e){return null;}})();
+/* GitHub erişim anahtarı: tarayıcıda ana parolayla ŞİFRELİ saklanır */
+const EPD_TOK_KEY='epd_ghtok_v1';
+async function _getToken(forceAsk){
+  if(!forceAsk){try{const raw=localStorage.getItem(EPD_TOK_KEY);
+    if(raw){const o=await epdDecrypt(JSON.parse(raw),EPD_PASS);if(o&&o.t)return o.t;}}catch(e){}}
+  const t=prompt("GitHub erişim anahtarını (token) yapıştırın:\n\nAnahtar yalnızca pano verisini GitHub'a kaydetmek için kullanılır ve bu tarayıcıda şifreli saklanır. Anahtarı yöneticinizden/Nilsu'dan alabilirsiniz.");
+  if(!t)return null;
+  const tok=t.trim();
+  try{localStorage.setItem(EPD_TOK_KEY,JSON.stringify(await epdEncrypt({t:tok},EPD_PASS)));}catch(e){}
+  return tok;
+}
+async function publishData(){
+  if(!EPD_PASS){toast('Önce parolayla giriş yapın','bad');return;}
+  const btn=document.getElementById('publishBtn');
+  const tok=await _getToken(false);
+  if(!tok){toast('Yayınlama iptal edildi — anahtar girilmedi','bad');return;}
+  if(btn){btn.disabled=true;btn.textContent='☁️ Yayınlanıyor…';}
+  try{
+    const snap={editors:DATA.editors,site:DATA.site,meta:{brands:DATA.meta.brands,months:MONTHS.slice(),generated:new Date().toISOString().slice(0,10),savedAt:new Date().toISOString()}};
+    const env=await epdEncrypt(snap,EPD_PASS);
+    const api='https://api.github.com/repos/'+EPD_REPO+'/contents/'+EPD_DATA_FILE;
+    const hdr={'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+    let sha=null;
+    const g=await fetch(api,{headers:hdr,cache:'no-store'});
+    if(g.status===401||g.status===403)throw {code:'auth'};
+    if(g.ok){const j=await g.json();sha=j.sha||null;}
+    const payload={message:'Pano verisi güncellendi ('+new Date().toLocaleString('tr-TR')+')',content:_b64e(_ENC.encode(JSON.stringify(env)))};
+    if(sha)payload.sha=sha;
+    const put=await fetch(api,{method:'PUT',headers:hdr,body:JSON.stringify(payload)});
+    if(put.status===401||put.status===403)throw {code:'auth'};
+    if(put.status===409)throw new Error('çakışma — sayfayı yenileyip tekrar deneyin');
+    if(!put.ok)throw new Error('HTTP '+put.status);
+    REMOTE_ENV_PROMISE=Promise.resolve(env);
+    toast('☁️ Yayınlandı — 1-2 dakika içinde herkes için güncellenir','good');
+  }catch(e){
+    if(e&&e.code==='auth'){
+      try{localStorage.removeItem(EPD_TOK_KEY);}catch(_){}
+      toast("Anahtar geçersiz ya da süresi dolmuş — Yayınla'ya tekrar basıp yeni anahtarı girin",'bad');
+    }else{
+      toast('Yayınlanamadı ('+((e&&e.message)||'bağlantı hatası')+') — veriniz tarayıcıda güvende, sonra tekrar deneyin','bad');
+    }
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='☁️ Kalıcı Kaydet (Yayınla)';}
+  }
+}
 function populateData(real){
   DATA.editors.length=0;(real.editors||[]).forEach(e=>DATA.editors.push(e));
   DATA.site.length=0;(real.site||[]).forEach(x=>DATA.site.push(x));
@@ -1775,7 +1831,7 @@ function commitStage(){
   ensureMonths();
   saveData();
   renderStage();renderDataset();render();
-  toast(added+' veri seti panoya eklendi · otomatik kaydedildi','good');
+  toast(added+" veri seti panoya eklendi · kalıcı yapmak için ☁️ Yayınla'ya basın",'good');
 }
 
 // ensure any new months appear in MONTHS/MKEY and selectors
@@ -1855,6 +1911,7 @@ function wireDrop(zoneId,inputId,handler,accept){
   wireDrop('dzPdf','filePdf',handlePdf,'pdf');
   document.getElementById('commitBtn').onclick=commitStage;
   document.getElementById('clearStageBtn').onclick=()=>{stage=[];renderStage();};
+  document.getElementById('publishBtn').onclick=publishData;
   document.getElementById('exportBtn').onclick=exportHtml;
   document.getElementById('exportJsonBtn').onclick=exportJson;
   renderDataset();
@@ -2320,10 +2377,12 @@ function logout(){
 }
 
 async function tryLogin(u,p){
-  const env=_encEnvelope();
-  if(!env)return false;
-  let real;
-  try{ real=await epdDecrypt(env,p); }catch(e){ return false; }
+  const remote=await REMOTE_ENV_PROMISE.catch(()=>null);
+  const emb=_encEnvelope();
+  let real=null;
+  if(remote){try{ real=await epdDecrypt(remote,p); }catch(e){}}
+  if(!real&&emb){try{ real=await epdDecrypt(emb,p); }catch(e){}}
+  if(!real)return false;
   populateData(real);
   try{
     const raw=localStorage.getItem(EPD_STORE_KEY);
