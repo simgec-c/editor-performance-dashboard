@@ -706,6 +706,20 @@ tbody tr:last-child td{border-bottom:0}
 .btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
 .stage-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
 .export-note{font-size:11.5px;color:var(--muted);font-family:'Inter',sans-serif}
+/* yayın durumu: yayınlanmamış veri bandı + Veri Ekle'deki durum kutusu */
+.unpub-bar{background:#FFF6DB;border-bottom:1px solid #EBD38A}
+.unpub-inner{max-width:1480px;margin:0 auto;padding:10px 28px;display:flex;gap:12px;align-items:center;font-family:'Inter',sans-serif;font-size:13px;color:#5b4708}
+.unpub-ic{font-size:16px}
+.unpub-txt{flex:1;line-height:1.45}
+.unpub-txt b{color:#3d2f04}
+.unpub-btn{background:var(--ink);color:#fff;border:0;padding:8px 14px;border-radius:var(--r-sm);font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.unpub-btn:hover{background:var(--ink-3)}.unpub-btn:disabled{opacity:.5;cursor:not-allowed}
+.pub-status{margin-top:14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper-2);padding:12px 16px;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--text);line-height:1.6}
+.pub-status .ps-row{display:flex;gap:8px;align-items:baseline}
+.pub-status .ps-dot{width:8px;height:8px;border-radius:50%;flex:none;transform:translateY(-1px)}
+.pub-status .ps-err{margin-top:8px;padding:10px 12px;border-radius:8px;background:#fbeae7;color:#7a1f14;border:1px solid #efc4bd}
+.pub-status .ps-err b{display:block;margin-bottom:2px}
+.pub-status .ps-ok{margin-top:8px;padding:10px 12px;border-radius:8px;background:#e3f4ec;color:#11553a;border:1px solid #b9e2cf}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:var(--r);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;box-shadow:var(--shadow-lg);opacity:0;transition:all .3s;z-index:100;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.good{background:var(--good)}.toast.bad{background:var(--bad)}
@@ -805,6 +819,62 @@ body.locked{overflow:hidden}
 .cmp-hint{font-size:11.5px;color:var(--muted);font-family:'Inter',sans-serif}
 .cmp-winner{display:inline-block;font-size:10px;font-weight:700;color:var(--good);background:rgba(31,157,107,.1);padding:1px 7px;border-radius:5px;margin-left:7px}
 
+/* ===== İÇGÖRÜLER ===== */
+.tab .tnew{font-size:9px;letter-spacing:.08em;background:var(--tg);color:#fff;border-radius:20px;padding:1px 7px;font-weight:700}
+.ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:1080px){.ins-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.ins-grid{grid-template-columns:1fr}}
+.ins-card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.ins-card.clickable{cursor:pointer;transition:border-color .15s}
+.ins-card.clickable:hover{border-color:var(--ink)}
+.ins-k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;font-family:'Inter',sans-serif}
+.ins-v{font-size:26px;font-weight:700;color:var(--ink);margin:6px 0 4px;font-family:'Inter',sans-serif;letter-spacing:-.01em}
+.ins-v.up{color:var(--good)}.ins-v.down{color:var(--bad)}
+.ins-t{font-size:12.5px;color:var(--text);line-height:1.55;font-family:'Inter',sans-serif}
+.ins-t b{color:var(--ink)}
+.mv-row{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(60px,1fr) auto;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;font-family:'Inter',sans-serif}
+.mv-row:last-child{border-bottom:0}
+.mv-row:hover .editor-link{color:var(--ink);border-bottom-color:var(--ink)}
+.mv-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mv-bar{height:8px;background:var(--paper);border-radius:4px;overflow:hidden}
+.mv-bar span{display:block;height:100%;border-radius:4px}
+.mv-bar span.up{background:var(--good)}.mv-bar span.down{background:var(--bad)}
+.mv-val{text-align:right;display:flex;flex-direction:column;line-height:1.3;min-width:120px}
+.mv-val b{font-size:13px}.mv-val b.up{color:var(--good)}.mv-val b.down{color:var(--bad)}
+.mv-val span{font-size:11px;color:var(--muted)}
+.heat-wrap{overflow-x:auto}
+table.heat{width:100%;border-collapse:separate;border-spacing:2px;font-family:'Inter',sans-serif}
+.heat thead th{background:none;color:var(--muted);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:6px 8px;text-align:center;position:static;cursor:default}
+.heat thead th:first-child{text-align:left}
+.heat tbody td{padding:8px 6px;text-align:center;font-size:12px;border:0;border-radius:4px;font-variant-numeric:tabular-nums;min-width:66px;font-weight:600}
+.heat tbody td.hn{text-align:left;background:none;font-weight:600;white-space:nowrap;padding-right:14px;cursor:pointer;color:var(--text)}
+.heat tbody td.hn:hover{color:var(--ink);text-decoration:underline}
+.heat tbody td.na{background:var(--paper);color:var(--muted-2);font-weight:400}
+.heat tbody tr:hover{background:none}
+.heat-legend{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:11px;color:var(--muted);font-family:'Inter',sans-serif;flex-wrap:wrap}
+.heat-legend .hl-strip{display:inline-flex;gap:2px}
+.heat-legend .hl-strip span{width:22px;height:10px;border-radius:2px;display:inline-block}
+.heat-legend .hl-na{margin-left:10px}
+/* ===== YAYIN AYARLARI ===== */
+.diag-list{display:flex;flex-direction:column;gap:8px;font-family:'Inter',sans-serif}
+.diag-empty{font-size:12.5px;color:var(--muted)}
+.diag-row{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:9px;border:1px solid var(--line);background:var(--paper)}
+.diag-row .diag-ic{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex:none;margin-top:1px}
+.diag-row.ok .diag-ic{background:var(--good)}.diag-row.warn .diag-ic{background:var(--warn)}.diag-row.bad .diag-ic{background:var(--bad)}.diag-row.info .diag-ic{background:var(--muted-2)}
+.diag-row b{font-size:13px;color:var(--ink)}
+.diag-d{font-size:12px;color:var(--muted);line-height:1.5;margin-top:2px;word-break:break-word}
+.diag-d a{color:var(--ink);font-weight:600}
+.howto{padding-left:20px;font-family:'Inter',sans-serif;font-size:12.8px;line-height:1.6;color:var(--text)}
+.howto li{margin-bottom:8px}
+.howto li.howto-alt{list-style:none;margin-left:-20px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.howto a{color:var(--tg);font-weight:700}
+.howto code,.diag-d code{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:11.5px}
+.pub-status .ps-warn{margin-top:8px;padding:10px 12px;border-radius:8px;background:#FFF6DB;color:#5b4708;border:1px solid #EBD38A}
+.file-bar{background:#E8F1FB;border-bottom:1px solid #C5DAF2}
+.file-bar .unpub-inner{color:#1b3a5c}.file-bar a{color:#0e3d7e;font-weight:700}
+.ins-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:-4px 0 14px;font-family:'Inter',sans-serif}
+.ins-bar-l{font-size:12.5px;font-weight:600;color:var(--text)}
+.heat tbody td.hn{width:1%}
 </style>
 </head>
 <body>
@@ -822,7 +892,7 @@ body.locked{overflow:hidden}
         <div class="lab-row"><span class="lab-dot" style="background:var(--tgrt)"></span> TGRT</div>
         <div class="lab-row"><span class="lab-dot" style="background:var(--tt)"></span> Türkiye Today</div>
       </div>
-      <div class="login-aside-foot">Oca–May 2026 · GA4 editör &amp; site raporları</div>
+      <div class="login-aside-foot">Aylık GA4 editör &amp; site raporları</div>
     </aside>
     <div class="login-main">
       <div class="login-card">
@@ -856,7 +926,7 @@ body.locked{overflow:hidden}
     </div>
     <div class="masthead-meta">
       <div class="mm"><span class="l">Markalar</span><span class="v">TG · TGRT · TT</span></div>
-      <div class="mm"><span class="l">Dönem</span><span class="v">Oca–May 2026</span></div>
+      <div class="mm"><span class="l">Dönem</span><span class="v" id="mmPeriod">Oca–May 2026</span></div>
       <div class="mm"><span class="l">Durum</span><span class="v"><span class="dot"></span>Canlı veri</span></div>
     </div>
   </div>
@@ -900,6 +970,7 @@ body.locked{overflow:hidden}
 
 <nav class="tabs" id="tabs">
   <button class="tab on" data-view="overview">Genel Bakış</button>
+  <button class="tab" data-view="insights">İçgörüler <span class="tnew">YENİ</span></button>
   <button class="tab" data-view="brand">Marka Analizi</button>
   <button class="tab" data-view="editors">Editör Sıralaması <span class="tnum" id="edCount">0</span></button>
   <button class="tab" data-view="drill">Editör İncelemesi</button>
@@ -933,6 +1004,33 @@ body.locked{overflow:hidden}
         <div class="panel-head"><h3>En İyi 8 Editör</h3><span class="ph-sub" id="topMetricLbl">Görüntülenme</span></div>
         <div class="chart-box short"><canvas id="topChart"></canvas></div>
       </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section class="view" id="view-insights">
+    <div class="section-head"><h2>Öne Çıkanlar</h2><span class="sub" id="insSub"></span><span class="rule"></span></div>
+    <div class="ins-bar"><span class="ins-bar-l">Kişi olmayan hesaplar <span class="cmp-hint">(Bilinmiyor, TGRT Haber, Türkiye Gazetesi, alan adları)</span></span>
+      <div class="seg" id="corpSeg"><button class="on" data-v="out">Hariç tut</button><button data-v="in">Dahil et</button></div>
+      <span class="cmp-hint">Toplam görüntülenme kartı her zaman tüm hesapları sayar.</span></div>
+    <div class="ins-grid" id="insCards"></div>
+    <div class="section-head"><h2>Verimlilik Matrisi</h2><span class="sub">Üretim hacmi ile içerik başına erişim bir arada · noktaya tıklayınca editör açılır</span><span class="rule"></span></div>
+    <div class="panel">
+      <div class="panel-head"><h3>Post sayısı × Post başına görüntülenme</h3><span class="ph-sub" id="insMatrixNote"></span></div>
+      <div class="chart-box tall"><canvas id="insMatrix"></canvas></div>
+    </div>
+    <div class="section-head"><h2>Yükselenler ve Düşenler</h2><span class="sub">Seçili aralığın son iki ayı</span><span class="rule"></span></div>
+    <div class="grid-2" id="insMovers"></div>
+    <div class="section-head"><h2>Aylık Isı Haritası</h2><span class="sub" id="insHeatSub"></span><span class="rule"></span></div>
+    <div class="panel">
+      <div class="panel-head"><h3>En çok okunan 15 editör × ay</h3><div class="seg" id="heatSeg"><button class="on" data-v="abs">Mutlak</button><button data-v="row">Editöre göre</button></div></div>
+      <div class="heat-wrap" id="insHeat"></div>
+      <div class="heat-legend" id="insHeatLegend"></div>
+    </div>
+    <div class="section-head"><h2>Görüntülenme Yoğunlaşması</h2><span class="sub">Trafiğin kaç editöre bağlı olduğu</span><span class="rule"></span></div>
+    <div class="panel">
+      <div class="panel-head"><h3>Kümülatif görüntülenme payı</h3><div class="legend" id="insParetoSum"></div></div>
+      <div class="chart-box"><canvas id="insPareto"></canvas></div>
     </div>
   </section>
 
@@ -1011,6 +1109,16 @@ body.locked{overflow:hidden}
         <div class="chart-box"><canvas id="chanChart"></canvas></div>
       </div>
     </div>
+    <div class="grid-2" style="margin-top:18px">
+      <div class="panel">
+        <div class="panel-head"><h3>Kanal Karışımı (aylık)</h3><span class="ph-sub" id="mixBrandLbl"></span></div>
+        <div class="chart-box"><canvas id="siteMix"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>Geri Dönen Kullanıcı Payı</h3><span class="ph-sub">Yeni + geri dönen kullanıcılar içinde</span></div>
+        <div class="chart-box"><canvas id="siteLoyal"></canvas></div>
+      </div>
+    </div>
     <div class="callout" style="margin-top:18px" id="siteCallout"></div>
   </section>
 
@@ -1019,7 +1127,7 @@ body.locked{overflow:hidden}
     <div class="section-head"><h2>Veri Ekle</h2><span class="sub">Her ay yeni editör (Excel) ve site (PDF) dosyalarını yükleyin</span><span class="rule"></span></div>
 
     <div class="add-intro">
-      <p><b>Nasıl çalışır?</b> Aynı formattaki aylık dosyalarınızı buraya bırakın. Pano markayı ve ayı otomatik tanır; onayladıktan sonra veriler tüm sekmelere işlenir. İşiniz bitince <b>“Güncel panoyu indir”</b> ile yeni dosyayı kaydedin — gelecek ay o dosyayı açıp kaldığınız yerden devam edin.</p>
+      <p><b>Nasıl çalışır?</b> Aynı formattaki aylık dosyalarınızı buraya bırakın. Pano markayı ve ayı otomatik tanır; onayladıktan sonra veriler tüm sekmelere işlenir. İşiniz bitince <b>☁️ Kalıcı Kaydet (Yayınla)</b>'ya basın — veriler 1-2 dakika içinde herkes için güncellenir. Yayınlamadığınız veriler yalnızca bu tarayıcıda kalır.</p>
     </div>
 
     <div class="grid-2" style="margin-top:18px">
@@ -1067,11 +1175,29 @@ body.locked{overflow:hidden}
       <button class="btn-ghost" id="exportJsonBtn">Veriyi JSON olarak indir</button>
       <span class="export-note" id="exportNote">Eklediğiniz veriler tarayıcınıza otomatik kaydedilir; herkes için kalıcı olması için ☁️ Yayınla'ya basın.</span>
     </div>
+    <div class="pub-status" id="publishStatus"></div>
+
+    <div class="section-head"><h2 style="font-size:16px">Yayın Ayarları</h2><span class="sub">Kalıcı kaydın neden çalışmadığını adım adım bulun</span><span class="rule"></span></div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><h3>🔎 Bağlantı kontrolü</h3></div>
+        <div class="diag-list" id="diagList"><div class="diag-empty">Pano nereden açılmış, yayındaki veri okunuyor mu, GitHub anahtarı ve Pages ayarı doğru mu: tek tuşla kontrol edin.</div></div>
+        <div class="stage-actions">
+          <button class="btn-primary" id="diagBtn">Yayın ayarlarını kontrol et</button>
+          <button class="btn-ghost" id="tokBtn">Anahtarı değiştir</button>
+          <button class="btn-ghost" id="tokDelBtn">Anahtarı bu tarayıcıdan sil</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>🔑 GitHub anahtarı nasıl alınır?</h3><span class="ph-sub">Bir kez yapılır</span></div>
+        <ol class="howto" id="howto"></ol>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer class="foot">
-  <span>Dijital Varlıklar — Editör Performans Panosu · Kaynak: GA4 editör & site raporları (Oca–May 2026)</span>
+  <span>Dijital Varlıklar — Editör Performans Panosu · Kaynak: GA4 editör & site raporları (<span id="footPeriod">Oca–May 2026</span>)</span>
   <span id="footStat"></span>
 </footer>
 
@@ -1102,59 +1228,181 @@ async function epdEncrypt(obj,pass){
 }
 function _skeleton(){return {editors:[],site:[],meta:{brands:{},months:[],generated:'',savedAt:''}};}
 function _encEnvelope(){try{const el=document.getElementById('encpayload');if(el){const t=el.textContent.trim();if(t&&t.indexOf('__ENC')<0)return JSON.parse(t);}}catch(e){}return null;}
-/* ===== Yayınlanmış veri: repo'daki data.json (şifreli zarf). Sayfa gömülü
-   veriden önce bunu dener; ulaşılamazsa gömülüye düşer. ===== */
+/* ===== Yayınlanmış veri: repo'daki data.json (şifreli zarf).
+   Birden çok kaynağı dener (canlı site, repodaki ham dosya, gömülü veri) ve
+   girişte EN YENİ kaydı seçer. Bilgisayardan (file://) açıldığında da
+   yayındaki veriyi canlı siteden okumayı dener. ===== */
 const EPD_REPO='simgec-c/editor-performance-dashboard';
 const EPD_DATA_FILE='data.json';
-let REMOTE_ENV_PROMISE=(async()=>{try{
-  const r=await fetch(EPD_DATA_FILE+'?v='+Date.now(),{cache:'no-store'});
+const EPD_OWNER=EPD_REPO.split('/')[0], EPD_NAME=EPD_REPO.split('/')[1];
+const EPD_PAGES_URL='https://'+EPD_OWNER.toLowerCase()+'.github.io/'+EPD_NAME+'/';
+const EPD_RAW_URL='https://raw.githubusercontent.com/'+EPD_REPO+'/HEAD/'+EPD_DATA_FILE;
+const EPD_API_REPO='https://api.github.com/repos/'+EPD_REPO;
+const EPD_IS_FILE=location.protocol==='file:';
+async function _fetchEnv(url){try{
+  const r=await fetch(url+(url.indexOf('?')<0?'?':'&')+'v='+Date.now(),{cache:'no-store'});
   if(!r.ok)return null;
   const j=await r.json();
   return (j&&j.ct&&j.salt&&j.iv)?j:null;
-}catch(e){return null;}})();
+}catch(e){return null;}}
+let REMOTE_ENV_PROMISE=(async()=>{
+  const tries=EPD_IS_FILE?[[EPD_PAGES_URL+EPD_DATA_FILE,'site'],[EPD_RAW_URL,'raw']]:[[EPD_DATA_FILE,'site'],[EPD_RAW_URL,'raw']];
+  const got=await Promise.all(tries.map(([u,s])=>_fetchEnv(u).then(env=>env?{env,src:s}:null)));
+  return got.filter(Boolean);
+})();
 /* GitHub erişim anahtarı: tarayıcıda ana parolayla ŞİFRELİ saklanır */
 const EPD_TOK_KEY='epd_ghtok_v1';
 async function _getToken(forceAsk){
   if(!forceAsk){try{const raw=localStorage.getItem(EPD_TOK_KEY);
     if(raw){const o=await epdDecrypt(JSON.parse(raw),EPD_PASS);if(o&&o.t)return o.t;}}catch(e){}}
-  const t=prompt("GitHub erişim anahtarını (token) yapıştırın:\n\nAnahtar yalnızca pano verisini GitHub'a kaydetmek için kullanılır ve bu tarayıcıda şifreli saklanır. Anahtarı yöneticinizden/Nilsu'dan alabilirsiniz.");
+  const t=prompt("GitHub erişim anahtarını (token) yapıştırın:\n\nAnahtarınız yoksa: Veri Ekle sekmesinin altındaki 'GitHub anahtarı nasıl alınır?' kutusundaki adımları izleyin (classic anahtar, 'public_repo' ya da özel repoda 'repo' izni).\n\nAnahtar yalnızca pano verisini GitHub'a kaydetmek için kullanılır ve bu tarayıcıda parolanızla şifreli saklanır.");
   if(!t)return null;
   const tok=t.trim();
   try{localStorage.setItem(EPD_TOK_KEY,JSON.stringify(await epdEncrypt({t:tok},EPD_PASS)));}catch(e){}
   return tok;
 }
+/* ===== Yayın durumu ===== */
+const EPD_LASTPUB_KEY='epd_lastpub_v1';   /* son başarılı yayının zamanı (şifresiz, yalnızca tarih) */
+let PUB={savedAt:'',generated:'',months:[]}; /* herkesin gördüğü (yayındaki) veri */
+let UNPUB=false;                              /* bu tarayıcıda yayınlanmamış veri var mı */
+let PUB_RESULT=null;                          /* son yayınlama denemesinin sonucu {ok,title,detail,at} */
+let PUB_BUSY=false;
+function _metaOf(d){const m=(d&&d.meta)||{};return {savedAt:m.savedAt||'',generated:m.generated||'',months:(m.months||[]).map(x=>x.key)};}
+function _fmtDT(iso){if(!iso)return '';const d=new Date(iso);if(isNaN(d))return String(iso);
+  return d.toLocaleString('tr-TR',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});}
+function _fmtD(iso){if(!iso)return '';const d=new Date(iso.length===10?iso+'T12:00:00':iso);if(isNaN(d))return String(iso);
+  return d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});}
+function _monLbl(k){const m=MONTHS.find(x=>x.key===k),t=(m&&m.tr)||k;return /\d{4}/.test(t)?t:t+' '+String(k).slice(0,4);}
+function _shortMon(k){const n=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];const [y,mo]=String(k).split('-');return (n[(+mo)-1]||k)+' '+y;}
+function _periodLbl(keys){if(!keys.length)return '—';const a=keys[0],b=keys[keys.length-1];
+  if(a===b)return _shortMon(a);
+  return a.slice(0,4)===b.slice(0,4)?_shortMon(a).split(' ')[0]+'–'+_shortMon(b):_shortMon(a)+' – '+_shortMon(b);}
+function _pubWhen(){return PUB.savedAt?('son yayın: '+_fmtDT(PUB.savedAt)):(PUB.generated?('yayındaki veri: '+_fmtD(PUB.generated)):'');}
+function _unpubWhat(){const nm=MKEY.filter(k=>!PUB.months.includes(k));
+  return nm.length?('<b>'+nm.map(_monLbl).join(', ')+'</b> verisi'):'Yaptığınız değişiklikler';}
+function renderPeriod(){const p=_periodLbl(MKEY.slice());
+  const a=document.getElementById('mmPeriod');if(a)a.textContent=p;
+  const b=document.getElementById('footPeriod');if(b)b.textContent=p;}
+function renderPublishState(){
+  renderPeriod();
+  let bar=document.getElementById('unpubBar');
+  if(UNPUB){
+    if(!bar){bar=document.createElement('div');bar.id='unpubBar';bar.className='unpub-bar';
+      const ctr=document.querySelector('.controls');ctr.parentNode.insertBefore(bar,ctr);}
+    const w=_pubWhen();
+    bar.innerHTML=`<div class="unpub-inner"><span class="unpub-ic">⚠️</span>
+      <div class="unpub-txt"><b>Yayınlanmamış veri var.</b> ${_unpubWhat()} yalnızca bu tarayıcıda kayıtlı; diğer kullanıcılar bunu göremiyor${w?' ('+w+')':''}.</div>
+      <button class="unpub-btn" id="unpubPublish" ${PUB_BUSY?'disabled':''}>${PUB_BUSY?'☁️ Yayınlanıyor…':'☁️ Şimdi Yayınla'}</button></div>`;
+    document.getElementById('unpubPublish').onclick=publishData;
+  }else if(bar)bar.remove();
+  const st=document.getElementById('publishStatus');
+  if(st){
+    const pubMonths=PUB.months.length?_periodLbl(PUB.months):'—';
+    let h=`<div class="ps-row"><span class="ps-dot" style="background:var(--good)"></span><span><b>Herkesin gördüğü veri:</b> ${pubMonths}${_pubWhen()?' · '+_pubWhen():''}</span></div>`;
+    h+=UNPUB?`<div class="ps-row"><span class="ps-dot" style="background:var(--warn)"></span><span><b>Bu tarayıcıda yayınlanmamış veri var:</b> ${_unpubWhat()}. Herkes için kalıcı olması için ☁️ Yayınla'ya basın.</span></div>`
+            :`<div class="ps-row"><span class="ps-dot" style="background:var(--muted-2)"></span><span>Bu tarayıcıdaki veri yayındakiyle aynı.</span></div>`;
+    if(PUB_RESULT){
+      h+=PUB_RESULT.ok?`<div class="${PUB_RESULT.warn?'ps-warn':'ps-ok'}"><b>${PUB_RESULT.title}</b>${PUB_RESULT.detail}</div>`
+                      :`<div class="ps-err"><b>Yayınlanamadı — ${PUB_RESULT.title}</b>${PUB_RESULT.detail}<br><span style="opacity:.75">Verileriniz bu tarayıcıda güvende. (${_fmtDT(PUB_RESULT.at)})</span></div>`;
+    }
+    st.innerHTML=h;
+  }
+}
+/* GitHub yanıtını kullanıcıya anlaşılır nedene çevir */
+async function _ghMsg(r){try{const j=await r.clone().json();return (j&&j.message)||'';}catch(e){return '';}}
+function _ghFail(status,msg,phase,hdrs){
+  const m=String(msg||'').toLowerCase(), rl=hdrs&&hdrs.get&&hdrs.get('x-ratelimit-remaining');
+  const repo=EPD_REPO.split('/')[1];
+  if(status===401)return {drop:true,title:'anahtar geçersiz ya da süresi dolmuş',
+    detail:"GitHub'da yeni bir anahtar oluşturup Yayınla'ya tekrar basın; yeni anahtar istenecek."};
+  if((status===403||status===429)&&(m.includes('rate limit')||rl==='0'))return {drop:false,title:'GitHub istek sınırı doldu',
+    detail:'Birkaç dakika bekleyip tekrar deneyin. Anahtarınız saklı kaldı.'};
+  if(status===403||(status===404&&phase==='put'))return {drop:true,title:'anahtarın bu repoya yazma izni yok',
+    detail:`Anahtarı oluştururken <b>Repository access</b> bölümünde <b>${repo}</b> reposunu seçin ve <b>Contents</b> iznini <b>Read and write</b> yapın. Anahtar, repoya yazma yetkisi olan bir hesaba ait olmalı. Sonra Yayınla'ya tekrar basın; yeni anahtar istenecek.`+(msg?`<br><span style="opacity:.75">GitHub yanıtı: ${sane(msg)}</span>`:'')};
+  if(status===409||(status===422&&m.includes('sha')))return {drop:false,title:'çakışma',
+    detail:'Aynı anda başka bir kayıt yapılmış. Birkaç saniye bekleyip tekrar deneyin.'};
+  return {drop:false,title:'GitHub hatası (HTTP '+status+')',detail:msg?sane(msg):'Biraz sonra tekrar deneyin.'};
+}
+/* GitHub Pages ayarı: veri dosyası Pages'in yayın yaptığı dal/klasöre yazılmalı */
+let PAGES_INFO=null;
+function _ghHdr(tok){return {'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};}
+async function _pagesInfo(hdr){
+  try{const r=await fetch(EPD_API_REPO+'/pages',{headers:hdr,cache:'no-store'});
+    if(r.ok){const j=await r.json();const s=j.source||{};
+      return {ok:true,status:200,branch:s.branch||'',dir:s.path||'/',url:j.html_url||EPD_PAGES_URL,build:j.build_type||'legacy'};}
+    return {ok:false,status:r.status};
+  }catch(e){return {ok:false,status:0};}
+}
+function _dataPath(pi){
+  if(pi&&pi.ok&&pi.build!=='workflow'&&pi.dir&&pi.dir!=='/')return pi.dir.replace(/^\/+|\/+$/g,'')+'/'+EPD_DATA_FILE;
+  return EPD_DATA_FILE;
+}
+/* yayından sonra canlı sitenin yeni veriyi gerçekten sunduğunu doğrula */
+let VERIFY_TIMER=null;
+function _verifyLive(savedAt,base){
+  clearTimeout(VERIFY_TIMER);
+  const url=EPD_IS_FILE?(String(base||EPD_PAGES_URL).replace(/\/?$/,'/')+EPD_DATA_FILE):EPD_DATA_FILE;
+  const t0=Date.now();
+  const tick=async()=>{
+    let ok=false;const env=await _fetchEnv(url);
+    if(env){try{const d=await epdDecrypt(env,EPD_PASS);ok=!!(d&&d.meta&&d.meta.savedAt===savedAt);}catch(e){}}
+    if(ok){if(PUB_RESULT&&PUB_RESULT.at===savedAt){PUB_RESULT.detail=' — canlı sitede doğrulandı ✓ Artık herkes bu veriyi görüyor.';PUB_RESULT.warn=false;renderPublishState();}
+      toast('✓ Yayın canlı sitede doğrulandı','good');return;}
+    if(Date.now()-t0>5*60*1000){if(PUB_RESULT&&PUB_RESULT.at===savedAt){
+      PUB_RESULT.detail=" — dosya GitHub'a kaydedildi ama 5 dakikadır canlı sitede görünmüyor. Aşağıdaki <b>Yayın ayarlarını kontrol et</b> ile nedenine bakın (Pages başka bir dal ya da klasörden yayın yapıyor olabilir).";
+      PUB_RESULT.warn=true;renderPublishState();}return;}
+    VERIFY_TIMER=setTimeout(tick,20000);
+  };
+  VERIFY_TIMER=setTimeout(tick,15000);
+}
 async function publishData(){
   if(!EPD_PASS){toast('Önce parolayla giriş yapın','bad');return;}
+  if(PUB_BUSY)return;
+  /* çift tıklamayı önlemek için anahtar çözülmeden önce kilitle */
+  PUB_BUSY=true;renderPublishState();
   const btn=document.getElementById('publishBtn');
-  const tok=await _getToken(false);
-  if(!tok){toast('Yayınlama iptal edildi — anahtar girilmedi','bad');return;}
   if(btn){btn.disabled=true;btn.textContent='☁️ Yayınlanıyor…';}
+  const fail=(f)=>{PUB_RESULT={ok:false,title:f.title,detail:f.detail,at:new Date().toISOString()};
+    if(f.drop){try{localStorage.removeItem(EPD_TOK_KEY);}catch(_){}}
+    toast('Yayınlanamadı — '+f.title,'bad');};
   try{
+    const tok=await _getToken(false);
+    if(!tok){toast('Yayınlama iptal edildi — anahtar girilmedi','bad');return;}
     const snap={editors:DATA.editors,site:DATA.site,meta:{brands:DATA.meta.brands,months:MONTHS.slice(),generated:new Date().toISOString().slice(0,10),savedAt:new Date().toISOString()}};
     const env=await epdEncrypt(snap,EPD_PASS);
-    const api='https://api.github.com/repos/'+EPD_REPO+'/contents/'+EPD_DATA_FILE;
-    const hdr={'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
-    let sha=null;
-    const g=await fetch(api,{headers:hdr,cache:'no-store'});
-    if(g.status===401||g.status===403)throw {code:'auth'};
+    const hdr=_ghHdr(tok);
+    PAGES_INFO=await _pagesInfo(hdr);
+    const branch=(PAGES_INFO.ok&&PAGES_INFO.build!=='workflow'&&PAGES_INFO.branch)?PAGES_INFO.branch:'';
+    const path=_dataPath(PAGES_INFO);
+    const api=EPD_API_REPO+'/contents/'+path;
+    let sha=null,g,put;
+    /* object medya tipi: dosya 1 MB'ı geçse de sha döner */
+    try{g=await fetch(api+(branch?'?ref='+encodeURIComponent(branch):''),{headers:Object.assign({},hdr,{'Accept':'application/vnd.github.object+json'}),cache:'no-store'});}
+    catch(e){throw {net:true};}
     if(g.ok){const j=await g.json();sha=j.sha||null;}
+    else if(g.status!==404){fail(_ghFail(g.status,await _ghMsg(g),'get',g.headers));return;}
     const payload={message:'Pano verisi güncellendi ('+new Date().toLocaleString('tr-TR')+')',content:_b64e(_ENC.encode(JSON.stringify(env)))};
     if(sha)payload.sha=sha;
-    const put=await fetch(api,{method:'PUT',headers:hdr,body:JSON.stringify(payload)});
-    if(put.status===401||put.status===403)throw {code:'auth'};
-    if(put.status===409)throw new Error('çakışma — sayfayı yenileyip tekrar deneyin');
-    if(!put.ok)throw new Error('HTTP '+put.status);
-    REMOTE_ENV_PROMISE=Promise.resolve(env);
+    if(branch)payload.branch=branch;
+    try{put=await fetch(api,{method:'PUT',headers:hdr,body:JSON.stringify(payload)});}
+    catch(e){throw {net:true};}
+    if(!put.ok){fail(_ghFail(put.status,await _ghMsg(put),'put',put.headers));return;}
+    /* başarılı: yayın durumu + yerel kopya yayınlananla aynı olsun */
+    REMOTE_ENV_PROMISE=Promise.resolve([{env,src:'site'}]);
+    PUB={savedAt:snap.meta.savedAt,generated:snap.meta.generated,months:MKEY.slice()};
+    UNPUB=false;
+    try{localStorage.setItem(EPD_STORE_KEY,JSON.stringify(env));localStorage.setItem(EPD_LASTPUB_KEY,snap.meta.savedAt);}catch(_){}
+    PUB_RESULT={ok:true,title:'☁️ Yayınlandı',detail:' — '+sane(path)+" GitHub'a kaydedildi. Canlı sitede görünmesi bekleniyor (1-2 dk)…",at:snap.meta.savedAt};
     toast('☁️ Yayınlandı — 1-2 dakika içinde herkes için güncellenir','good');
+    _verifyLive(snap.meta.savedAt,(PAGES_INFO.ok&&PAGES_INFO.url)||EPD_PAGES_URL);
   }catch(e){
-    if(e&&e.code==='auth'){
-      try{localStorage.removeItem(EPD_TOK_KEY);}catch(_){}
-      toast("Anahtar geçersiz ya da süresi dolmuş — Yayınla'ya tekrar basıp yeni anahtarı girin",'bad');
-    }else{
-      toast('Yayınlanamadı ('+((e&&e.message)||'bağlantı hatası')+') — veriniz tarayıcıda güvende, sonra tekrar deneyin','bad');
-    }
+    if(e&&e.net)fail({drop:false,title:"GitHub'a bağlanılamadı",
+      detail:"api.github.com adresine ulaşılamadı. İnternet bağlantınızı kontrol edin; şirket ağında ya da VPN'de bu adres engelli olabilir."});
+    else fail({drop:false,title:'beklenmeyen hata',detail:sane((e&&e.message)||String(e))});
   }finally{
+    PUB_BUSY=false;
     if(btn){btn.disabled=false;btn.textContent='☁️ Kalıcı Kaydet (Yayınla)';}
+    renderPublishState();
   }
 }
 function populateData(real){
@@ -1171,6 +1419,7 @@ function saveData(){
   if(!EPD_PASS)return;
   try{
     const snap={editors:DATA.editors,site:DATA.site,meta:{brands:DATA.meta.brands,months:MONTHS.slice(),generated:new Date().toISOString().slice(0,10),savedAt:new Date().toISOString()}};
+    UNPUB=true;PUB_RESULT=null;renderPublishState();
     epdEncrypt(snap,EPD_PASS).then(env=>{try{localStorage.setItem(EPD_STORE_KEY,JSON.stringify(env));}catch(e){console.warn('Taslak kaydedilemedi',e);toast('Taslak kaydedilemedi — tarayıcı deposu dolu olabilir','bad');}}).catch(e=>{console.warn('Taslak sifrelenemedi',e);toast('Taslak kaydedilemedi (şifreleme hatası) — veri tarayıcıya yazılamadı','bad');});
   }catch(e){console.warn('Taslak kaydedilemedi',e);toast('Taslak kaydedilemedi','bad');}
 }
@@ -1187,6 +1436,11 @@ const fmtN = n=>{n=Math.round(n);
 const fmtFull = n=>Math.round(n).toLocaleString('tr-TR');
 const fmtSec = s=>{s=Math.round(s);const m=Math.floor(s/60),r=s%60;return m?`${m}d ${r}s`:`${r}s`;};
 const monthTr = k=>(MONTHS.find(m=>m.key===k)||{}).tr||k;
+/* seçili aralık etiketi — yıl koda gömülü değil (2026 → 2027 geçişi) */
+const _TRN={'01':'Ocak','02':'Şubat','03':'Mart','04':'Nisan','05':'Mayıs','06':'Haziran','07':'Temmuz','08':'Ağustos','09':'Eylül','10':'Ekim','11':'Kasım','12':'Aralık'};
+function _rng(sep){const a=state.from||'',b=state.to||'',n=k=>_TRN[String(k).slice(5,7)]||k,ya=String(a).slice(0,4),yb=String(b).slice(0,4);
+  if(ya===yb)return (a===b?n(a):n(a)+sep+n(b))+' '+ya;
+  return n(a)+' '+ya+sep+n(b)+' '+yb;}
 
 const state={brand:'ALL',from:MKEY[0],to:MKEY[MKEY.length-1],metric:'views',search:'',view:'overview',sortKey:'views',sortDir:-1,editor:null};
 let charts={};
@@ -1242,7 +1496,7 @@ function activeBrands(){return state.brand==='ALL'?['TG','TGRT','TT']:[state.bra
 function renderOverview(){
   const bs=activeBrands();
   document.getElementById('ovTitle').textContent = state.brand==='ALL'?'Portföy Özeti':BRANDS[state.brand].full+' Özeti';
-  document.getElementById('ovSub').textContent = `${monthTr(state.from)} – ${monthTr(state.to)} 2026 · ${bs.length} marka`;
+  document.getElementById('ovSub').textContent = `${_rng(' – ')} · ${bs.length} marka`;
 
   // totals over range
   let T={posts:0,views:0,users:0,sessions:0,_eW:0,_eP:0,eds:new Set()};
@@ -1336,7 +1590,7 @@ function metricLabel(m){return {views:'Görüntülenme',users:'Kullanıcı',sess
 
 /* ---------- BRAND VIEW ---------- */
 function renderBrand(){
-  document.getElementById('brSub').textContent=`${monthTr(state.from)} – ${monthTr(state.to)} 2026`;
+  document.getElementById('brSub').textContent=`${_rng(' – ')}`;
   const bs=['TG','TGRT','TT'];
   document.getElementById('brandKpiRow').innerHTML=bs.map(b=>{
     const t=brandTotals(b);const s=brandMonthSeries(b,'views').filter(x=>x!=null);
@@ -1420,7 +1674,7 @@ function renderEditors(){
   // cache for export + wire download buttons
   window._edRows=rows;
   const info=document.getElementById('edRowInfo');
-  if(info)info.textContent=`${rows.length} editör · ${monthTr(state.from)}–${monthTr(state.to)} 2026`;
+  if(info)info.textContent=`${rows.length} editör · ${_rng('–')}`;
   document.querySelectorAll('#view-editors [data-dl]').forEach(btn=>btn.onclick=()=>exportEditorReport(btn.dataset.dl,rows));
 }
 
@@ -1459,7 +1713,7 @@ function renderDrill(){
      <div class="ed-head" style="flex:1">
        <div class="ed-avatar" style="background:${BRANDS[brand].color}">${initials}</div>
        <div><div class="ed-name">${name}</div>
-         <div class="ed-sub"><span class="bpill ${brand}">${brand}</span> ${BRANDS[brand].full} · ${monthTr(state.from)}–${monthTr(state.to)} 2026 · marka içi sıralama #${rank}/${peers.length}</div></div>
+         <div class="ed-sub"><span class="bpill ${brand}">${brand}</span> ${BRANDS[brand].full} · ${_rng('–')} · marka içi sıralama #${rank}/${peers.length}</div></div>
      </div>
      <select id="drillSelect" style="min-width:240px">${opts.map(o=>`<option ${o===state.editor?'selected':''} value="${encodeURIComponent(o)}">${o.split('|')[1]} (${o.split('|')[0]})</option>`).join('')}</select>
    </div>
@@ -1549,7 +1803,7 @@ function renderSite(){
     const avgEng=tot.n?tot._e/tot.n:0;
     const newPct=tot.totalUsers?tot.newUsers/(tot.newUsers+tot.returningUsers)*100:0;
     return `<div class="site-card ${b}">
-      <h3>${BRANDS[b].full}</h3><div class="scsub">${monthTr(state.from)}–${monthTr(state.to)} 2026 toplamı</div>
+      <h3>${BRANDS[b].full}</h3><div class="scsub">${_rng('–')} toplamı</div>
       <div class="site-row"><span class="sl">Toplam Kullanıcı</span><span class="sv num">${fmtFull(tot.totalUsers)}</span></div>
       <div class="site-row"><span class="sl">Yeni Kullanıcı</span><span class="sv num">${fmtFull(tot.newUsers)} <span style="color:var(--muted);font-weight:500">(${newPct.toFixed(0)}%)</span></span></div>
       <div class="site-row"><span class="sl">Geri Dönen</span><span class="sv num">${fmtFull(tot.returningUsers)}</span></div>
@@ -1605,7 +1859,8 @@ function render(){
   else if(state.view==='editors')renderEditors();
   else if(state.view==='drill')renderDrill();
   else if(state.view==='compare'){if(typeof renderCompare==='function')renderCompare();}
-  else if(state.view==='site')renderSite();
+  else if(state.view==='site'){renderSite();renderSiteExtras();}
+  else if(state.view==='insights')renderInsights();
   else if(state.view==='add'){if(typeof renderDataset==='function')renderDataset();}
   if(typeof decorateChartDownloads==='function')setTimeout(decorateChartDownloads,30);
 }
@@ -1881,7 +2136,12 @@ async function exportHtml(){
   const snap={editors:DATA.editors,site:DATA.site,meta:{brands:DATA.meta.brands,months:MONTHS,generated:new Date().toISOString().slice(0,10),savedAt:new Date().toISOString()}};
   let env;
   try{ env=await epdEncrypt(snap,EPD_PASS); }catch(e){toast('Sifreleme hatasi','bad');return;}
-  let html=document.documentElement.outerHTML;
+  const _clone=document.documentElement.cloneNode(true);
+  _clone.querySelectorAll('#unpubBar,#fileBar,.user-chip,.toast').forEach(n=>n.remove());
+  {const _dl=_clone.querySelector('#diagList');if(_dl)_dl.innerHTML='';}
+  ['fromMonth','toMonth'].forEach(id=>{const n=_clone.querySelector('#'+id);if(n)n.innerHTML='';});
+  const _ps=_clone.querySelector('#publishStatus');if(_ps)_ps.innerHTML='';
+  let html=_clone.outerHTML;
   html=html.replace(/(<script id="payload"[^>]*>)[\s\S]*?(<\/script>)/, '$1'+JSON.stringify(_skeleton())+'$2');
   const encStr=JSON.stringify(env).replace(/<\//g,'<\\/');
   html=html.replace(/(<script id="encpayload"[^>]*>)[\s\S]*?(<\/script>)/, '$1'+encStr+'$2');
@@ -2006,7 +2266,7 @@ function exportPDF(rows){
   doc.text('Editör Performans Raporu',40,28);
   doc.setFont(FONT,'normal');doc.setFontSize(9);doc.setTextColor(190,200,215);
   const scopeTxt=scope==='ALL'?'Tüm Markalar (TG · TGRT · TT)':BRANDS[scope].full;
-  doc.text(`${scopeTxt}  ·  ${monthTr(state.from)}–${monthTr(state.to)} 2026  ·  ${rows.length} editör`,40,43);
+  doc.text(`${scopeTxt}  ·  ${_rng('–')}  ·  ${rows.length} editör`,40,43);
   doc.setTextColor(150,160,175);
   doc.text('Dijital Varlıklar · Yayın Analitiği',W-40,43,{align:'right'});
 
@@ -2048,7 +2308,7 @@ function downloadChart(chartKey,niceName){
   const scope=scopeBrandTag();
   ctx.fillStyle='#97A0AD';ctx.font='400 11px Inter, sans-serif';
   const scopeTxt=scope==='ALL'?'Tüm Markalar':BRANDS[scope].full;
-  ctx.textAlign='right';ctx.fillText(`${scopeTxt} · ${monthTr(state.from)}–${monthTr(state.to)} 2026`,cv.width-pad,28);
+  ctx.textAlign='right';ctx.fillText(`${scopeTxt} · ${_rng('–')}`,cv.width-pad,28);
   ctx.textAlign='left';
   ctx.drawImage(src,pad,44+pad);
   cv.toBlob(b=>{dl(tsName('grafik-'+(niceName||'chart').toLowerCase().replace(/[^a-z0-9]+/g,'-'),'png'),b);
@@ -2079,7 +2339,9 @@ function decorateChartDownloads(){
     effChart:['eff','Kullanıcı Verimliliği'], engChart:['eng','Etkileşim Kalitesi'],
     siteTrend:['siteTrend','Toplam Kullanıcı Eğilimi'], chanChart:['chan','Trafik Kanalları'],
     edTrend:['edTrend','Editör Aylık Performans'], edRadar:['edRadar','Editör Metrik Profili'],
-    cmpBar:['cmpBar','Editör Kıyaslama'], cmpRadar:['cmpRadar','Kıyaslama Profili']
+    cmpBar:['cmpBar','Editör Kıyaslama'], cmpRadar:['cmpRadar','Kıyaslama Profili'],
+    insMatrix:['insMatrix','Verimlilik Matrisi'], insPareto:['insPareto','Görüntülenme Yoğunlaşması'],
+    siteMix:['siteMix','Kanal Karışımı'], siteLoyal:['siteLoyal','Geri Dönen Kullanıcı Payı']
   };
   Object.keys(M).forEach(cid=>{
     const canvas=document.getElementById(cid);if(!canvas)return;
@@ -2109,7 +2371,7 @@ function cmpAggFor(key){
 }
 
 function renderCompare(){
-  document.getElementById('cmpSub').textContent=`${state.brand==='ALL'?'Tüm markalar':BRANDS[state.brand].full} · ${monthTr(state.from)}–${monthTr(state.to)} 2026`;
+  document.getElementById('cmpSub').textContent=`${state.brand==='ALL'?'Tüm markalar':BRANDS[state.brand].full} · ${_rng('–')}`;
   // prune selections no longer valid (brand scope/date)
   const valid=new Set(DATA.editors.filter(e=>state.brand==='ALL'||e.brand===state.brand).map(e=>e.brand+'|'+e.editor));
   cmpSel=cmpSel.filter(k=>valid.has(k));
@@ -2265,7 +2527,7 @@ function exportCompare(fmt,data,metrics){
   doc.setTextColor(255,255,255);doc.setFont(FONT,'bold');doc.setFontSize(15);
   doc.text('Editör Kıyaslama Raporu',40,28);
   doc.setFont(FONT,'normal');doc.setFontSize(9);doc.setTextColor(190,200,215);
-  doc.text(`${data.map(d=>d.editor).join('  ·  ')}  —  ${monthTr(state.from)}–${monthTr(state.to)} 2026`,40,43);
+  doc.text(`${data.map(d=>d.editor).join('  ·  ')}  —  ${_rng('–')}`,40,43);
   const body=rowsOut.map(r=>r.map((c,i)=>i===0?c:(typeof c==='number'?c.toLocaleString('tr-TR'):c)));
   doc.autoTable({head:[head],body,startY:70,
     styles:{font:FONT,fontSize:9,cellPadding:6,lineColor:[228,224,214],lineWidth:.5},
@@ -2305,7 +2567,7 @@ function exportEditorMonthly(fmt,brand,name,rows){
   doc.setTextColor(255,255,255);doc.setFont(FONT,'bold');doc.setFontSize(15);
   doc.text(name,40,28);
   doc.setFont(FONT,'normal');doc.setFontSize(9);doc.setTextColor(190,200,215);
-  doc.text(`${BRANDS[brand].full}  ·  ${monthTr(state.from)}–${monthTr(state.to)} 2026  ·  Aylık performans`,40,43);
+  doc.text(`${BRANDS[brand].full}  ·  ${_rng('–')}  ·  Aylık performans`,40,43);
   const body=rows.map(r=>EDM_COLS.map(c=>{const v=r[c[1]];return typeof v==='number'?v.toLocaleString('tr-TR'):v;}));
   doc.autoTable({head:[EDM_COLS.map(c=>c[0])],body,startY:70,
     styles:{font:FONT,fontSize:9,cellPadding:6,lineColor:[228,224,214],lineWidth:.5},
@@ -2316,6 +2578,263 @@ function exportEditorMonthly(fmt,brand,name,rows){
   toast('PDF indirildi','good');
 }
 
+
+/* ================= YAYIN AYARLARI: kontrol + anahtar rehberi ================= */
+function _esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function _fileBanner(){
+  if(!EPD_IS_FILE||document.getElementById('fileBar'))return;
+  const b=document.createElement('div');b.id='fileBar';b.className='file-bar';
+  b.innerHTML=`<div class="unpub-inner"><span class="unpub-ic">ℹ️</span><div class="unpub-txt"><b>Panoyu bilgisayardaki bir dosyadan açtın.</b> Yayındaki veriyi okumaya çalışıyorum, ama burada eklediğin veriler yalnızca bu dosyada kalır. Herkesin gördüğü pano: <a href="${EPD_PAGES_URL}" target="_blank" rel="noopener">${EPD_PAGES_URL}</a></div></div>`;
+  const ctr=document.querySelector('.controls');ctr.parentNode.insertBefore(b,ctr);
+}
+function _fillHowto(){
+  const el=document.getElementById('howto');if(!el)return;
+  const repoUrl='https://github.com/'+EPD_REPO;
+  const fg=`https://github.com/settings/personal-access-tokens/new?name=Pano+yayinla&description=Editor+panosu+veri+yayini&target_name=${encodeURIComponent(EPD_OWNER)}&expires_in=366&contents=write&pages=read`;
+  el.innerHTML=`
+  <li>GitHub'a repo sahibi hesapla (<b>${_esc(EPD_OWNER)}</b>) giriş yap. <a href="${repoUrl}" target="_blank" rel="noopener">Repo sayfasında</a> adın yanında <b>Public</b> mi <b>Private</b> mı yazdığına bak.</li>
+  <li>Anahtar sayfasını aç: Public ise <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=Pano+yayinla" target="_blank" rel="noopener">bu link</a>, Private ise <a href="https://github.com/settings/tokens/new?scopes=repo&description=Pano+yayinla" target="_blank" rel="noopener">bu link</a>. Gereken izin kutusu işaretli gelir.</li>
+  <li><b>Expiration</b> için bir süre seç (ör. 1 yıl). Süre dolunca pano senden yeni anahtar ister.</li>
+  <li><b>Generate token</b>'a bas. <code>ghp_…</code> ile başlayan anahtarı hemen kopyala, GitHub onu bir kez gösterir.</li>
+  <li>Buradaki <b>☁️ Kalıcı Kaydet (Yayınla)</b>'ya bas ve anahtarı yapıştır. Bu tarayıcı bir daha sormaz.</li>
+  <li class="howto-alt">Daha dar yetkili alternatif: <a href="${fg}" target="_blank" rel="noopener">fine-grained anahtar</a>. Repository access → Only select repositories → <b>${_esc(EPD_NAME)}</b>, Contents → Read and write. Bu tür yalnızca repo sahibinin hesabında çalışır.</li>`;
+}
+async function _storedToken(){try{const raw=localStorage.getItem(EPD_TOK_KEY);if(raw){const o=await epdDecrypt(JSON.parse(raw),EPD_PASS);return (o&&o.t)||null;}}catch(e){}return null;}
+async function runDiag(){
+  const list=document.getElementById('diagList'),btn=document.getElementById('diagBtn');
+  if(!EPD_PASS){toast('Önce parolayla giriş yapın','bad');return;}
+  btn.disabled=true;btn.textContent='Kontrol ediliyor…';
+  const rows=[];
+  const draw=()=>{list.innerHTML=rows.map(r=>`<div class="diag-row ${r.st}"><span class="diag-ic">${{ok:'✓',warn:'!',bad:'✕',info:'i'}[r.st]}</span><div><b>${r.t}</b>${r.d?`<div class="diag-d">${r.d}</div>`:''}</div></div>`).join('')+
+    (btn.disabled?'<div class="diag-empty">Kontrol sürüyor…</div>':'');};
+  const put=(st,t,d)=>{rows.push({st,t,d:d||''});draw();};
+  draw();
+  try{
+    /* 1 — pano nereden açıldı */
+    if(EPD_IS_FILE)put('bad','Pano bilgisayardaki dosyadan açılmış',`Burada eklenen veri yalnızca bu dosyanın tarayıcı hafızasında kalır. Panoyu her zaman şu adresten aç: <a href="${EPD_PAGES_URL}" target="_blank" rel="noopener">${EPD_PAGES_URL}</a>`);
+    else put('ok','Pano canlı siteden açılmış',_esc(location.origin+location.pathname));
+    /* 2 — yayındaki veri */
+    const srcs=[[EPD_IS_FILE?EPD_PAGES_URL+EPD_DATA_FILE:EPD_DATA_FILE,'Canlı sitedeki veri'],[EPD_RAW_URL,'Repodaki veri dosyası']];
+    for(const [u,l] of srcs){
+      const env=await _fetchEnv(u);
+      if(!env){put('warn',l+': data.json bulunamadı','Henüz hiç yayın yapılmamış olabilir, ya da site farklı bir klasörden yayın yapıyor.');continue;}
+      let d=null;try{d=await epdDecrypt(env,EPD_PASS);}catch(e){}
+      if(!d){put('bad',l+': dosya var ama bu parolayla açılmıyor','Dosya başka bir parolayla şifrelenmiş.');continue;}
+      const mk=((d.meta&&d.meta.months)||[]).map(m=>m.key);
+      put('ok',l+' okunuyor',`${_periodLbl(mk)} · son kayıt: ${_esc(_fmtDT(d.meta.savedAt)||_fmtD(d.meta.generated)||'—')}`);
+    }
+    /* 3 — GitHub API erişimi */
+    try{const r=await fetch(EPD_API_REPO,{cache:'no-store'});
+      if(r.ok)put('ok','GitHub API erişilebilir','Repo herkese açık (public).');
+      else if(r.status===404)put('info','Repo herkese açık değil (private)','Anahtar oluştururken <b>repo</b> iznini seç.');
+      else if(r.status===403)put('warn','GitHub istek sınırı doldu','Birkaç dakika sonra tekrar dene.');
+      else put('warn','GitHub API yanıtı: HTTP '+r.status,'');
+    }catch(e){put('bad','api.github.com adresine ulaşılamıyor','Şirket ağı ya da VPN bu adresi engelliyor olabilir. Bu ağdan yayın yapılamaz; başka bir ağdan (ör. telefon interneti) dene.');}
+    /* 4 — anahtar */
+    const tok=await _storedToken();
+    if(!tok)put('warn','Bu tarayıcıda kayıtlı GitHub anahtarı yok',"Yayınla'ya bastığında istenir. Sağdaki adımlarla bir anahtar oluştur.");
+    else{
+      const hdr=_ghHdr(tok),classic=/^ghp_/.test(tok);
+      try{const r=await fetch(EPD_API_REPO,{headers:hdr,cache:'no-store'});
+        const sc=r.headers.get('x-oauth-scopes');
+        if(r.status===401)put('bad','Anahtar geçersiz ya da süresi dolmuş','“Anahtarı değiştir” ile yenisini gir.');
+        else if(r.status===404||r.status===403)put('bad','Anahtar bu repoyu göremiyor',`Anahtar başka bir hesapta oluşturulmuş ya da fine-grained anahtarda <b>${_esc(EPD_NAME)}</b> seçilmemiş.`);
+        else if(r.ok){const j=await r.json();const perm=j.permissions||{};
+          if(perm.push===false)put('bad','Bu hesabın repoya yazma yetkisi yok','Repo sahibinden seni “Write” yetkisiyle ortak çalışan eklemesini iste ya da anahtarı repo sahibi oluştursun.');
+          else if(classic&&sc!=null&&!/(^|[ ,])(public_)?repo([ ,]|$)/.test(sc))put('bad','Classic anahtarda yazma izni yok',`Anahtarın izinleri: ${_esc(sc||'yok')}. Yeni anahtarda <b>public_repo</b> (özel repoda <b>repo</b>) kutusunu işaretle.`);
+          else put('ok','GitHub anahtarı çalışıyor',`Tür: ${classic?'classic':'fine-grained'}${classic&&sc?' · izinler: '+_esc(sc):''}. Yazma izni ilk yayında kesinleşir.`);
+        }else put('warn','Anahtar kontrolü: HTTP '+r.status,'');
+      }catch(e){put('bad','Anahtar kontrol edilemedi','api.github.com adresine ulaşılamadı.');}
+      /* 5 — Pages */
+      const pi=await _pagesInfo(hdr);PAGES_INFO=pi;
+      if(pi.ok)put('ok','GitHub Pages açık',`Kaynak: <b>${_esc(pi.branch||'?')}</b> dalı, <b>${_esc(pi.dir||'/')}</b> klasörü${pi.build==='workflow'?' (GitHub Actions)':''} · veri buraya yazılır: <code>${_esc(_dataPath(pi))}</code>`);
+      else if(pi.status===404)put('warn','Pages bilgisi alınamadı','Pages kapalı olabilir ya da anahtarın Pages okuma izni yok. Site açılıyorsa sorun değil.');
+      else if(pi.status===403)put('info','Pages ayarı okunamadı','Anahtarda Pages okuma izni yok. Bu isteğe bağlı, yayın yine çalışır.');
+    }
+  }finally{btn.disabled=false;btn.textContent='Yeniden kontrol et';draw();}
+}
+(function initPublishTools(){
+  _fillHowto();
+  const d=document.getElementById('diagBtn');if(d)d.onclick=runDiag;
+  const t=document.getElementById('tokBtn');if(t)t.onclick=async()=>{if(!EPD_PASS){toast('Önce parolayla giriş yapın','bad');return;}const k=await _getToken(true);if(k)toast('Anahtar kaydedildi','good');};
+  const x=document.getElementById('tokDelBtn');if(x)x.onclick=()=>{try{localStorage.removeItem(EPD_TOK_KEY);}catch(e){}toast('Anahtar bu tarayıcıdan silindi','good');};
+})();
+
+/* ================= İÇGÖRÜLER ================= */
+function _median(a){if(!a.length)return 0;const s=a.slice().sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2;}
+/* kişi olmayan hesaplar (marka hesabı, alan adı, atanmamış): kişi bazlı sıralamalarda varsayılan olarak hariç */
+const CORP_RE=/^(bilinmiyor|türkiye gazetesi|turkiye gazetesi|tgrt haber|türkiye today|turkiye today|\(not set\))$|\.(com|net|org)(\.tr)?$/i;
+function _isCorp(n){return CORP_RE.test(String(n||'').trim());}
+let insCorp=false;
+function _agIns(){return aggEditors().filter(e=>insCorp||!_isCorp(e.editor));}
+function _edMonth(m){const o={};DATA.editors.forEach(e=>{if(e.month!==m)return;if(state.brand!=='ALL'&&e.brand!==state.brand)return;if(!insCorp&&_isCorp(e.editor))return;o[e.brand+'|'+e.editor]=e;});return o;}
+const SEQ=['#eaf3fd','#cce3fd','#9dc8f7','#6aabf1','#338ced','#2370cd','#1757ac','#0e3d7e'];
+let insHeatMode='abs';
+const _logTick=v=>/^[125]0*$/.test(String(v))?fmtN(v):'';
+/* medyan çizgileri + çeyrek etiketleri */
+const QUAD_PLUGIN={id:'quad',afterDraw(ch,args,o){
+  if(!o||!o.mx||!o.my)return;const {ctx,chartArea:a,scales:{x,y}}=ch;
+  const px=x.getPixelForValue(o.mx),py=y.getPixelForValue(o.my);
+  ctx.save();ctx.strokeStyle='rgba(15,26,46,.30)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(px,a.top);ctx.lineTo(px,a.bottom);ctx.moveTo(a.left,py);ctx.lineTo(a.right,py);ctx.stroke();
+  ctx.fillStyle='#6B7787';ctx.font='700 10.5px Inter, sans-serif';
+  [[a.right-8,a.top+14,'right','YILDIZLAR · çok yazıp çok okunan'],[a.left+8,a.top+14,'left','AZ AMA ETKİLİ'],
+   [a.right-8,a.bottom-8,'right','HACİM ODAKLI'],[a.left+8,a.bottom-8,'left','GELİŞİM ALANI']]
+   .forEach(([tx,ty,al,t])=>{ctx.textAlign=al;ctx.fillText(t,tx,ty);});
+  ctx.restore();}};
+/* yatay kılavuz çizgisi (ör. %80) */
+const GUIDE_PLUGIN={id:'guide',afterDatasetsDraw(ch,args,o){
+  if(!o||o.y==null)return;const {ctx,chartArea:a,scales:{y}}=ch;const py=y.getPixelForValue(o.y);
+  ctx.save();ctx.strokeStyle='rgba(15,26,46,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.left,py);ctx.lineTo(a.right,py);ctx.stroke();
+  ctx.fillStyle='#6B7787';ctx.font='700 10.5px Inter, sans-serif';ctx.textAlign='left';ctx.fillText('%'+o.y+' eşiği',a.left+6,py-6);ctx.restore();}};
+
+function renderInsights(){
+  const ms=monthsInRange();
+  document.getElementById('insSub').textContent=`${state.brand==='ALL'?'Tüm markalar':BRANDS[state.brand].full} · ${_rng(' – ')}`;
+  _insHighlights(ms);_insMatrix();_insMovers(ms);_insHeat(ms);_insPareto(activeBrands());
+}
+function _insHighlights(ms){
+  const cards=[],ag=_agIns();
+  const last=ms[ms.length-1],prev=ms.length>1?ms[ms.length-2]:null;
+  const sumV=m=>rowsFiltered().filter(e=>e.month===m).reduce((s,e)=>s+e.views,0);
+  if(prev){const a=sumV(prev),b=sumV(last),ch=pctChange(a,b);
+    if(ch!=null)cards.push({k:'Son ay · '+monthTr(last),v:(ch>=0?'▲ +':'▼ ')+ch.toFixed(1)+'%',cls:ch>=0?'up':'down',
+      t:`Görüntülenme bir önceki aya göre ${ch>=0?'arttı':'azaldı'}: ${fmtN(a)} → <b>${fmtN(b)}</b>.`});}
+  else if(last)cards.push({k:'Toplam · '+monthTr(last),v:fmtN(sumV(last)),t:'Seçili ayın toplam görüntülenmesi. Karşılaştırma için en az 2 ay seçin.'});
+  if(prev){const A=_edMonth(prev),B=_edMonth(last);let best=null;
+    Object.keys(B).forEach(k=>{const a=(A[k]&&A[k].views)||0,d=B[k].views-a;if(!best||d>best.d)best={k,d,a,b:B[k].views};});
+    if(best&&best.d>0){const [br,nm]=best.k.split('|');
+      cards.push({k:'Ayın yükseleni',v:'+'+fmtN(best.d),cls:'up',ed:best.k,
+        t:`<b>${_esc(nm)}</b> <span class="bpill ${br}">${br}</span> ${best.a?fmtN(best.a)+' → '+fmtN(best.b)+' görüntülenme.':'bu ay ilk kez listede: '+fmtN(best.b)+' görüntülenme.'}`});}}
+  const tot=ag.reduce((s,e)=>s+e.views,0),posts=ag.reduce((s,e)=>s+e.posts,0);
+  if(ag.length>=5&&tot){const top=ag.slice().sort((a,b)=>b.views-a.views);const t5=top.slice(0,5).reduce((s,e)=>s+e.views,0)/tot*100;
+    cards.push({k:'Yoğunlaşma',v:'%'+t5.toFixed(0),t:`Toplam görüntülenmede ilk 5 editörün payı (${ag.length} editör arasında). Lider: <b>${_esc(top[0].editor)}</b>.`});}
+  const thr=Math.max(10,Math.round(_median(ag.map(e=>e.posts))));
+  const eff=ag.filter(e=>e.posts>=thr).sort((a,b)=>b.viewsPerPost-a.viewsPerPost)[0];
+  if(eff&&posts)cards.push({k:'En verimli',v:fmtN(eff.viewsPerPost),ed:eff.brand+'|'+eff.editor,
+    t:`<b>${_esc(eff.editor)}</b> <span class="bpill ${eff.brand}">${eff.brand}</span> post başına görüntülenme. Genel ortalama ${fmtN(tot/posts)}. (En az ${thr} post yazanlar arasında.)`});
+  if(ms.length>1&&ag.length){const full=ag.filter(e=>e.activeMonths===ms.length).length;
+    cards.push({k:'Süreklilik',v:full+' / '+ag.length,t:`Seçili ${ms.length} ayın her birinde yayın yapan editör sayısı.`});}
+  const sb=activeBrands();
+  const ret=m=>{let n=0,r=0;DATA.site.forEach(s=>{if(s.month===m&&sb.includes(s.brand)){n+=s.newUsers||0;r+=s.returningUsers||0;}});return (n+r)?r/(n+r)*100:null;};
+  if(prev){const a=ret(prev),b=ret(last);if(a!=null&&b!=null){const d=b-a;
+    cards.push({k:'Sadakat · '+monthTr(last),v:'%'+b.toFixed(1),t:`Sitede geri dönen kullanıcı payı. Bir önceki aya göre <b>${d>=0?'+':''}${d.toFixed(1)} puan</b>.`});}}
+  const el=document.getElementById('insCards');
+  el.innerHTML=cards.length?cards.map(c=>`<div class="ins-card${c.ed?' clickable':''}" ${c.ed?`data-ed="${encodeURIComponent(c.ed)}" title="Editör incelemesini aç"`:''}><div class="ins-k">${c.k}</div><div class="ins-v num ${c.cls||''}">${c.v}</div><div class="ins-t">${c.t}</div></div>`).join(''):'<div class="empty">Bu filtrelerle veri yok.</div>';
+  el.querySelectorAll('[data-ed]').forEach(x=>x.onclick=()=>openEditor(decodeURIComponent(x.dataset.ed)));
+}
+function _insMatrix(){
+  const ag=_agIns().filter(e=>e.posts>0&&e.views>0),bs=activeBrands();
+  const mx=_median(ag.map(e=>e.posts)),my=_median(ag.map(e=>e.viewsPerPost));
+  const ds=bs.map(b=>({label:BRANDS[b].full,data:ag.filter(e=>e.brand===b).map(e=>({x:e.posts,y:e.viewsPerPost,e})),
+    backgroundColor:BRANDS[b].color+'d9',borderColor:'#fff',borderWidth:2,pointRadius:5,pointHoverRadius:8,pointHitRadius:9}));
+  destroy('insMatrix');
+  charts.insMatrix=new Chart(document.getElementById('insMatrix'),{type:'scatter',data:{datasets:ds},plugins:[QUAD_PLUGIN],
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{quad:{mx,my},legend:{display:bs.length>1,position:'bottom',labels:{usePointStyle:true,boxWidth:8,boxHeight:8,padding:16}},
+        tooltip:{callbacks:{title:i=>i[0].raw.e.editor,label:c=>{const e=c.raw.e;return [` ${BRANDS[e.brand].full}`,` Post: ${fmtFull(e.posts)}`,` Görüntülenme: ${fmtFull(e.views)}`,` Post başına: ${fmtFull(e.viewsPerPost)}`];}}}},
+      onClick:(ev,els)=>{if(els.length){const p=ds[els[0].datasetIndex].data[els[0].index].e;openEditor(p.brand+'|'+p.editor);}},
+      onHover:(ev,els)=>{if(ev.native&&ev.native.target)ev.native.target.style.cursor=els.length?'pointer':'default';},
+      scales:{x:{type:'logarithmic',grid:GRID,title:{display:true,text:'Post sayısı (logaritmik)'},ticks:{callback:_logTick}},
+        y:{type:'logarithmic',grid:GRID,title:{display:true,text:'Post başına görüntülenme (logaritmik)'},ticks:{callback:_logTick}}}}});
+  document.getElementById('insMatrixNote').textContent=ag.length?`Çizgiler medyan: ${fmtN(mx)} post · post başına ${fmtN(my)} görüntülenme`:'';
+}
+function _insMovers(ms){
+  const host=document.getElementById('insMovers');
+  if(ms.length<2){host.innerHTML='<div class="panel" style="grid-column:1/-1"><div class="empty">Yükselen ve düşenleri görmek için tarih aralığında en az 2 ay seçin.</div></div>';return;}
+  const last=ms[ms.length-1],prev=ms[ms.length-2],A=_edMonth(prev),B=_edMonth(last);
+  const rows=[...new Set([...Object.keys(A),...Object.keys(B)])].map(k=>{const a=(A[k]&&A[k].views)||0,b=(B[k]&&B[k].views)||0;return {k,a,b,d:b-a};});
+  const up=rows.filter(r=>r.d>0).sort((x,y)=>y.d-x.d).slice(0,6),dn=rows.filter(r=>r.d<0).sort((x,y)=>x.d-y.d).slice(0,6);
+  const mxAbs=Math.max(1,...up.map(r=>r.d),...dn.map(r=>-r.d));
+  const li=(r,dir)=>{const [br,nm]=r.k.split('|');const pc=r.a?r.d/r.a*100:null;
+    return `<div class="mv-row" data-ed="${encodeURIComponent(r.k)}" title="Editör incelemesini aç">
+      <div class="mv-name"><span class="editor-link">${_esc(nm)}</span> <span class="bpill ${br}">${br}</span></div>
+      <div class="mv-bar"><span class="${dir}" style="width:${(Math.abs(r.d)/mxAbs*100).toFixed(1)}%"></span></div>
+      <div class="mv-val num"><b class="${dir}">${dir==='up'?'▲ +':'▼ −'}${fmtN(Math.abs(r.d))}</b><span>${fmtN(r.a)} → ${fmtN(r.b)}${pc!=null?' · '+(pc>=0?'+':'')+pc.toFixed(0)+'%':' · yeni'}${r.b===0?' · yayın yok':''}</span></div></div>`;};
+  const sub=`${monthTr(prev)} → ${monthTr(last)} · görüntülenme farkı`;
+  host.innerHTML=`<div class="panel"><div class="panel-head"><h3>▲ Yükselenler</h3><span class="ph-sub">${sub}</span></div>${up.length?up.map(r=>li(r,'up')).join(''):'<div class="empty">Artış gösteren editör yok.</div>'}</div>
+    <div class="panel"><div class="panel-head"><h3>▼ Düşenler</h3><span class="ph-sub">${sub}</span></div>${dn.length?dn.map(r=>li(r,'down')).join(''):'<div class="empty">Düşüş gösteren editör yok.</div>'}</div>`;
+  host.querySelectorAll('[data-ed]').forEach(el=>el.onclick=()=>openEditor(decodeURIComponent(el.dataset.ed)));
+}
+function _insHeat(ms){
+  const metric=state.metric,host=document.getElementById('insHeat');
+  document.getElementById('insHeatSub').textContent=`Ölçüt: ${metricLabel(metric)} · üstteki “Sıralama Ölçütü”nden değişir`;
+  const top=_agIns().sort((a,b)=>b.views-a.views).slice(0,15);
+  if(!top.length||!ms.length){host.innerHTML='<div class="empty">Bu filtrelerle veri yok.</div>';document.getElementById('insHeatLegend').innerHTML='';return;}
+  const idx={};DATA.editors.forEach(e=>{idx[e.brand+'|'+e.editor+'|'+e.month]=e;});
+  const val=(k,m)=>{const e=idx[k+'|'+m];if(!e)return null;return metric==='viewsPerPost'?(e.posts?e.views/e.posts:0):(e[metric]||0);};
+  const M=top.map(r=>ms.map(m=>val(r.brand+'|'+r.editor,m)));
+  const all=M.flat().filter(v=>v!=null);const gmax=Math.max(1e-9,...all);
+  const fmt=v=>isTime(metric)?v.toFixed(1)+'s':fmtN(v);
+  let h='<table class="heat"><thead><tr><th>Editör</th>'+ms.map(m=>`<th>${monthTr(m)}</th>`).join('')+'</tr></thead><tbody>';
+  top.forEach((r,i)=>{const rmax=Math.max(1e-9,...M[i].filter(v=>v!=null));
+    h+=`<tr><td class="hn" data-ed="${encodeURIComponent(r.brand+'|'+r.editor)}"><span class="bpill ${r.brand}">${r.brand}</span> ${_esc(r.editor)}</td>`;
+    M[i].forEach((v,j)=>{if(v==null){h+='<td class="na" title="Bu ay veri yok">—</td>';return;}
+      const mx=insHeatMode==='row'?rmax:gmax;const b=Math.max(0,Math.min(7,Math.floor(v/mx*7.999)));
+      h+=`<td style="background:${SEQ[b]};color:${b>=4?'#fff':'#0F1A2E'}" title="${_esc(r.editor)} · ${monthTr(ms[j])}: ${isTime(metric)?v.toFixed(1)+' sn':fmtFull(v)}">${fmt(v)}</td>`;});
+    h+='</tr>';});
+  host.innerHTML=h+'</tbody></table>';
+  host.querySelectorAll('[data-ed]').forEach(el=>el.onclick=()=>openEditor(decodeURIComponent(el.dataset.ed)));
+  document.getElementById('insHeatLegend').innerHTML=`<span>${insHeatMode==='row'?'Editörün kendi en düşüğü':'Düşük'}</span><span class="hl-strip">${SEQ.map(c=>`<span style="background:${c}"></span>`).join('')}</span><span>${insHeatMode==='row'?'en yüksek ayı':'Yüksek'}</span><span class="hl-na">— veri yok</span>`;
+}
+function _insPareto(bs){
+  const ag=_agIns();
+  const S=bs.map(b=>{const v=ag.filter(e=>e.brand===b).map(e=>e.views).sort((x,y)=>y-x);const t=v.reduce((s,x)=>s+x,0);let c=0;
+    const cum=v.map(x=>{c+=x;return t?c/t*100:0;});return {b,cum,n:v.length,k80:cum.findIndex(x=>x>=80)+1};}).filter(s=>s.n);
+  const maxN=Math.max(1,...S.map(s=>s.n));
+  destroy('insPareto');
+  charts.insPareto=new Chart(document.getElementById('insPareto'),{type:'line',plugins:[GUIDE_PLUGIN],
+    data:{datasets:S.map(s=>({label:BRANDS[s.b].full,data:s.cum.map((y,i)=>({x:i+1,y})),borderColor:BRANDS[s.b].color,backgroundColor:BRANDS[s.b].color,
+      borderWidth:2,pointRadius:0,pointHoverRadius:5,tension:0}))},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false},
+      plugins:{guide:{y:80},legend:{display:false},tooltip:{callbacks:{title:i=>`İlk ${i[0].parsed.x} editör`,label:c=>` ${c.dataset.label}: toplamın %${c.parsed.y.toFixed(1)}`}}},
+      scales:{x:{type:'linear',min:1,max:maxN,grid:{display:false},title:{display:true,text:'Editör sırası (en çok okunandan başlayarak)'},ticks:{precision:0}},
+        y:{min:0,max:100,grid:GRID,ticks:{callback:v=>'%'+v},title:{display:true,text:'Kümülatif görüntülenme payı'}}}}});
+  document.getElementById('insParetoSum').innerHTML=S.map(s=>`<span class="chip"><span class="sw" style="background:${BRANDS[s.b].color}"></span>${s.b}: %80 için ${s.k80} / ${s.n} editör</span>`).join('');
+}
+
+/* ---------- SİTE: kanal karışımı + sadakat ---------- */
+const CH_ORDER=['Organic Search','Direct','Organic Social','Referral'];
+const CH_COL={'Organic Search':'#257de0','Direct':'#f47230','Organic Social':'#00b894','Referral':'#6a4ce2','Diğer':'#b9c0cb'};
+const CH_INK={'Organic Search':'#fff','Direct':'#0b0b0b','Organic Social':'#0b0b0b','Referral':'#fff','Diğer':'#0b0b0b'};
+const CH_TR={'Organic Search':'Organik Arama','Direct':'Doğrudan','Organic Social':'Organik Sosyal','Referral':'Yönlendirme','Diğer':'Diğer'};
+const SEGLBL_PLUGIN={id:'seglbl',afterDatasetsDraw(ch){const {ctx}=ch;ctx.save();ctx.font='700 10.5px Inter, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ch.data.datasets.forEach((d,di)=>{const meta=ch.getDatasetMeta(di);if(meta.hidden)return;
+    meta.data.forEach((el,i)=>{const v=d.data[i];if(v==null||v<8)return;const p=el.getProps(['x','y','base'],true);
+      ctx.fillStyle=d.inkColor||'#fff';ctx.fillText(Math.round(v)+'%',p.x,(p.y+p.base)/2);});});ctx.restore();}};
+function renderSiteExtras(){
+  const single=(typeof SESSION!=='undefined'&&SESSION&&SESSION.brand!=='ALL');
+  const bs=single?[SESSION.brand]:['TG','TGRT','TT'];
+  const cb=single?SESSION.brand:(state.brand==='ALL'?'TG':state.brand);
+  const ms=monthsInRange(),lbls=ms.map(monthTr);
+  document.getElementById('mixBrandLbl').textContent=`${BRANDS[cb].full}${!single&&state.brand==='ALL'?' · üstten marka seçerek değiştir':''}`;
+  const share=ms.map(m=>{const r=DATA.site.find(s=>s.brand===cb&&s.month===m);if(!r||!r.channels||!r.channels.length)return null;
+    const tot=r.channels.reduce((s,c)=>s+(c.users||0),0),o={};[...CH_ORDER,'Diğer'].forEach(k=>o[k]=0);
+    r.channels.forEach(c=>{const k=CH_ORDER.includes(c.channel)?c.channel:'Diğer';o[k]+=c.users||0;});
+    Object.keys(o).forEach(k=>o[k]=tot?o[k]/tot*100:0);return o;});
+  destroy('siteMix');
+  charts.siteMix=new Chart(document.getElementById('siteMix'),{type:'bar',plugins:[SEGLBL_PLUGIN],
+    data:{labels:lbls,datasets:[...CH_ORDER,'Diğer'].map(k=>({label:CH_TR[k],data:share.map(s=>s?s[k]:null),backgroundColor:CH_COL[k],inkColor:CH_INK[k],
+      borderColor:'#fff',borderWidth:{top:1,bottom:1,left:0,right:0},borderSkipped:false,barPercentage:.72,categoryPercentage:.9}))},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{boxWidth:10,boxHeight:10,padding:12}},
+        tooltip:{mode:'index',callbacks:{label:c=>` ${c.dataset.label}: %${(c.parsed.y||0).toFixed(1)}`}}},
+      scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,min:0,max:100,grid:GRID,ticks:{callback:v=>'%'+v}}}}});
+  destroy('siteLoyal');
+  charts.siteLoyal=new Chart(document.getElementById('siteLoyal'),{type:'line',
+    data:{labels:lbls,datasets:bs.map(b=>({label:BRANDS[b].full,data:ms.map(m=>{const s=DATA.site.find(x=>x.brand===b&&x.month===m);if(!s)return null;const t=(s.newUsers||0)+(s.returningUsers||0);return t?s.returningUsers/t*100:null;}),
+      borderColor:BRANDS[b].color,backgroundColor:BRANDS[b].color,borderWidth:2,tension:.3,pointRadius:4,pointBorderColor:'#fff',pointBorderWidth:2,spanGaps:true}))},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:bs.length>1,position:'bottom',labels:{boxWidth:10,boxHeight:10,padding:12}},
+        tooltip:{callbacks:{label:c=>` ${c.dataset.label}: %${(c.parsed.y||0).toFixed(1)}`}}},
+      scales:{y:{grid:GRID,ticks:{callback:v=>'%'+v}},x:{grid:{display:false}}}}});
+}
+(function initInsights(){
+  document.querySelectorAll('#corpSeg button').forEach(b=>b.onclick=()=>{insCorp=b.dataset.v==='in';
+    document.querySelectorAll('#corpSeg button').forEach(x=>x.classList.toggle('on',x===b));renderInsights();});
+  document.querySelectorAll('#heatSeg button').forEach(b=>b.onclick=()=>{insHeatMode=b.dataset.v;
+    document.querySelectorAll('#heatSeg button').forEach(x=>x.classList.toggle('on',x===b));_insHeat(monthsInRange());});
+})();
 
 /* ================= AUTH ================= */
 const AUTH = {"scopeLabel":"Şifreli erişim · tüm markalar","label":"Yönetici"};
@@ -2369,6 +2888,9 @@ function startApp(){
   applyRole();
   // boot the dashboard
   bootDashboard();
+  renderPublishState();
+  _fileBanner();
+  if(UNPUB)setTimeout(()=>toast('Bu tarayıcıda yayınlanmamış veri var — herkesin görmesi için ☁️ Yayınla','bad'),600);
 }
 
 function logout(){
@@ -2377,19 +2899,28 @@ function logout(){
 }
 
 async function tryLogin(u,p){
-  const remote=await REMOTE_ENV_PROMISE.catch(()=>null);
+  const remotes=await REMOTE_ENV_PROMISE.catch(()=>[]);
   const emb=_encEnvelope();
-  let real=null;
-  if(remote){try{ real=await epdDecrypt(remote,p); }catch(e){}}
-  if(!real&&emb){try{ real=await epdDecrypt(emb,p); }catch(e){}}
-  if(!real)return false;
+  const cands=(remotes||[]).slice();if(emb)cands.push({env:emb,src:'embedded'});
+  /* tüm kaynakları çöz, en yeni kaydı al (eski data.json yeni gömülü veriyi ezmesin) */
+  const dec=(await Promise.all(cands.map(c=>epdDecrypt(c.env,p).then(d=>({d,src:c.src})).catch(()=>null)))).filter(Boolean);
+  if(!dec.length)return false;
+  const _stamp=d=>((d&&d.meta&&(d.meta.savedAt||d.meta.generated))||'');
+  dec.sort((a,b)=>_stamp(a.d)<_stamp(b.d)?1:_stamp(a.d)>_stamp(b.d)?-1:0);
+  const real=dec[0].d;
   populateData(real);
+  PUB=_metaOf(real);UNPUB=false;
   try{
     const raw=localStorage.getItem(EPD_STORE_KEY);
     if(raw){
       const draft=await epdDecrypt(JSON.parse(raw),p);
       const ds=(draft.meta&&draft.meta.savedAt)||'', es=(real.meta&&real.meta.savedAt)||'';
-      if(ds&&ds>es) populateData(draft);
+      if(ds&&ds>es){
+        populateData(draft);
+        /* taslak az önce yayınlandıysa (GitHub Pages henüz güncellenmediyse) uyarı gösterme */
+        let lp='';try{lp=localStorage.getItem(EPD_LASTPUB_KEY)||'';}catch(e){}
+        if(lp&&lp>=ds)PUB=_metaOf(draft); else UNPUB=true;
+      }
       else { try{localStorage.removeItem(EPD_STORE_KEY);}catch(e){} }
     }
   }catch(e){}
